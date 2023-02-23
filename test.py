@@ -133,8 +133,8 @@ class BatchGradientDecent(Optimizer):
 
 if __name__ == "__main__":
 
-    # BATCH_SIZE = 32
     EPOCHS = 5
+    BATCH_SIZE = 32
     SHUFFLE_NUM = 10000
 
     # Get data
@@ -144,8 +144,8 @@ if __name__ == "__main__":
     x_train = np.divide(x_train, float(255))
     x_test = np.divide(x_test, float(255))
     # Batch and shuffle data
-    train_ds = tf.data.Dataset.from_tensor_slices((x_train, y_train)).shuffle(SHUFFLE_NUM)#.batch(BATCH_SIZE)
-    test_ds = tf.data.Dataset.from_tensor_slices((x_test, y_test))#.batch(BATCH_SIZE)
+    train_ds = tf.data.Dataset.from_tensor_slices((x_train, y_train)).shuffle(SHUFFLE_NUM).batch(BATCH_SIZE)
+    test_ds = tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(BATCH_SIZE)
 
     # Instantiate the model
     model = DigitClassifierModel(input_shape=(28,28), num_nds=512, num_cls=10)
